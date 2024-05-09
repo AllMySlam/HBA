@@ -5,7 +5,7 @@
 
 #include <Eigen/Dense>
 #include <Eigen/StdVector>
-#include <ceres/ceres.h>
+// #include <ceres/ceres.h>
 #include <geometry_msgs/PoseArray.h>
 #include <pcl/filters/passthrough.h>
 #include <pcl/filters/statistical_outlier_removal.h>
