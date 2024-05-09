@@ -42,12 +42,26 @@ catkin_package(
   INCLUDE_DIRS
 )
 
+if(UNIX AND NOT APPLE)
+    MESSAGE(STATUS "unix")
+elseif(WIN32)
+    MESSAGE(STATUS "windows")
+elseif(APPLE)
+    MESSAGE(STATUS "mac os")
+
+    link_directories("/Users/aqiu/micromamba/envs/ros1//lib")
+    find_package(TBB REQUIRED)
+else()
+    MESSAGE(STATUS "other platform")
+endif()
+
+
 # Hierarchical Bundle Adjustment
 add_executable(hba source/hba.cpp)
-target_link_libraries(hba ${catkin_LIBRARIES} ${PCL_LIBRARIES} gtsam)
+target_link_libraries(hba ${catkin_LIBRARIES} ${PCL_LIBRARIES} gtsam tbb)
 
 add_executable(visualize_map source/visualize.cpp)
 target_link_libraries(visualize_map ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
 add_executable(calculate_MME source/calculate_MME.cpp)
-target_link_libraries(calculate_MME ${catkin_LIBRARIES} ${PCL_LIBRARIES} gtsam)
+target_link_libraries(calculate_MME ${catkin_LIBRARIES} ${PCL_LIBRARIES} gtsam tbb)

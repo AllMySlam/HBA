@@ -88,10 +88,10 @@ class LAYER {
         else {
             pose_size = pose_size_;
         }
-        tail          = (pose_size - WIN_SIZE) % GAP;
-        gap_num       = (pose_size - WIN_SIZE) / GAP;
-        last_win_size = pose_size - GAP * (gap_num + 1);
-        part_length   = ceil((gap_num + 1) / double(thread_num));
+        tail          = (pose_size - WIN_SIZE) % GAP;  // 最后一个win里面的帧数
+        gap_num       = (pose_size - WIN_SIZE) / GAP;  // 一共有多少个win需要处理(也就是local ba的个数)
+        last_win_size = pose_size - GAP * (gap_num + 1);  // 最后一个win里面的帧数
+        part_length = ceil((gap_num + 1) / double(thread_num));  // 多线程, 每个线程同时处理part_length个local BA优化
 
         if (gap_num - (thread_num - 1) * part_length < 0) {
             part_length = floor((gap_num + 1) / double(thread_num));
